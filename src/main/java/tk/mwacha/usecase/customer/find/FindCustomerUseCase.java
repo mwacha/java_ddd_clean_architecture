@@ -13,6 +13,5 @@ public class FindCustomerUseCase {
         final var customer = customerRepository.find(input.id());
 
         return OutputFindCustomerDTO.from(customer);
-
     }
 }

@@ -19,6 +19,15 @@ public final class MockHelper {
     return customer;
   }
 
+  public static Customer buildCustomerWithOutId() {
+    var customer = new Customer(null, "Customer");
+    customer.changeAddress(
+            Address.builder().street("Street1").number(1).zip("Zipcode1").city("City1").build());
+    customer.addRewardPoints(1);
+    customer.activate();
+    return customer;
+  }
+
   public static Product buildProduct() {
     return Product.builder()
         .id(UUID.randomUUID())
