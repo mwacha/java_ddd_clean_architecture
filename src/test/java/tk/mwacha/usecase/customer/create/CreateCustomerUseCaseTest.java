@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+import tk.mwacha.domain.customer.entity.Customer;
 import tk.mwacha.domain.customer.factory.CustomerFactory;
+import tk.mwacha.domain.customer.valueobject.Address;
 import tk.mwacha.helper.MockHelper;
 import tk.mwacha.infrastructure.customer.gateway.CustomerGateway;
 import tk.mwacha.usecase.customer.find.FindCustomerUseCase;
@@ -37,6 +39,41 @@ class CreateCustomerUseCaseTest {
         assertThat(output.address())
                 .usingRecursiveComparison()
                 .isEqualTo(result.address());
+
+    }
+
+    @Test
+    void should_not_create_a_customer_invalid_name() {
+        final var customerMock = MockHelper.buildCustomer();
+        ;
+
+        assertThrows(
+                RuntimeException.class,
+                () -> {
+                    customerMock.changeName("");
+                })
+                .getMessage()
+                .equals("Name is required");
+
+    }
+
+    @Test
+    void should_not_create_a_customer_invalid_address() {
+        final var customerMock = MockHelper.buildCustomer();
+
+        assertThrows(
+                RuntimeException.class,
+                () -> {
+                    customerMock.changeAddress(
+                            Address.builder()
+                                    .street("")
+                                    .number(1)
+                                    .zip("Zipcode1")
+                                    .city("City1")
+                                    .build());
+                })
+                .getMessage()
+                .equals("Street is required");
 
     }
 

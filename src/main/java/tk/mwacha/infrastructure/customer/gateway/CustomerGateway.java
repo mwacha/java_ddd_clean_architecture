@@ -19,7 +19,7 @@ public class CustomerGateway implements CustomerRepositoryInterface {
   @Override
   public void create(Customer entity) {
     var customer = CustomerModel.of(entity);
-    this.repository.save(customer);
+    this.repository.saveAndFlush(customer);
   }
 
   @Override
@@ -30,6 +30,7 @@ public class CustomerGateway implements CustomerRepositoryInterface {
 
   @Override
   public Customer find(UUID id) {
+    var all = repository.findAll();
     var customerModel = repository.findById(id).orElseThrow(RuntimeException::new);
 
     return CustomerModel.to(customerModel);

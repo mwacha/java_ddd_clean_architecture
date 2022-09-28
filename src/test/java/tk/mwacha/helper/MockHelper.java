@@ -12,21 +12,12 @@ import tk.mwacha.domain.customer.valueobject.Address;
 public final class MockHelper {
   public static Customer buildCustomer() {
     var customer = new Customer(UUID.randomUUID(), "Customer");
-    customer.changeAddress(
-        Address.builder().street("Street1").number(1).zip("Zipcode1").city("City1").build());
+    customer.changeAddress(builderAddress());
     customer.addRewardPoints(1);
     customer.activate();
     return customer;
   }
 
-  public static Customer buildCustomerWithOutId() {
-    var customer = new Customer(null, "Customer");
-    customer.changeAddress(
-            Address.builder().street("Street1").number(1).zip("Zipcode1").city("City1").build());
-    customer.addRewardPoints(1);
-    customer.activate();
-    return customer;
-  }
 
   public static Product buildProduct() {
     return Product.builder()
@@ -48,5 +39,9 @@ public final class MockHelper {
 
   public static Order buildOrder(final Customer customer, final List<OrderItem> orders) {
     return new Order(UUID.randomUUID(), customer.getId(), orders);
+  }
+
+  public static Address builderAddress() {
+    return Address.builder().street("Street1").number(1).zip("Zipcode1").city("City1").build();
   }
 }
