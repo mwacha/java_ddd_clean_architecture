@@ -1,16 +1,16 @@
-package tk.mwacha.infrastructure.gateway;
+package tk.mwacha.infrastructure.product.gateway;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.math.BigDecimal;
-import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mwacha.helper.MockHelper;
-import tk.mwacha.infrastructure.product.gateway.ProductGateway;
+import tk.mwacha.helper.MockProductHelper;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
@@ -20,7 +20,7 @@ class ProductGatewayTest {
 
   @Test
   void should_create_a_product() {
-    final var product = MockHelper.buildProduct();
+    final var product = MockProductHelper.buildProduct();
 
     gateway.create(product);
 
@@ -34,7 +34,7 @@ class ProductGatewayTest {
 
   @Test
   void should_update_a_product() {
-    final var product = MockHelper.buildProduct();
+    final var product = MockProductHelper.buildProduct();
 
     gateway.create(product);
 
@@ -62,7 +62,7 @@ class ProductGatewayTest {
 
   @Test
   void should_find_a_product() {
-    final var product = MockHelper.buildProduct();
+    final var product = MockProductHelper.buildProduct();
 
     gateway.create(product);
 
@@ -77,9 +77,9 @@ class ProductGatewayTest {
   @Test
   void should_find_all_product() {
 
-    final var product = MockHelper.buildProduct();
+    final var product = MockProductHelper.buildProduct();
 
-    final var product2 = MockHelper.buildProduct();
+    final var product2 = MockProductHelper.buildProduct();
     product2.changeName("Product 2");
 
     final var products = List.of(product, product2);

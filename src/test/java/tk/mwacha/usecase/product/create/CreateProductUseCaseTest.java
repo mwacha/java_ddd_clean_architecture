@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mwacha.domain.product.entity.Product;
 import tk.mwacha.domain.product.factory.ProductFactory;
-import tk.mwacha.helper.MockHelper;
+import tk.mwacha.helper.MockProductHelper;
 import tk.mwacha.infrastructure.product.gateway.ProductGateway;
 
 import java.math.BigDecimal;
@@ -22,7 +22,7 @@ class CreateProductUseCaseTest {
 
     @Test
     void should_create_a_product() {
-        final var productMock = MockHelper.buildProduct();
+        final var productMock = MockProductHelper.buildProduct();
 
         final var productToSave = ProductFactory.create("a", productMock.getName(), productMock.getPrice());
 
@@ -42,7 +42,7 @@ class CreateProductUseCaseTest {
 
     @Test
     void should_not_create_a_Product_invalid_name() {
-        final var productMock = MockHelper.buildProduct();
+        final var productMock = MockProductHelper.buildProduct();
         ;
 
         assertThrows(
@@ -57,7 +57,7 @@ class CreateProductUseCaseTest {
 
     @Test
     void should_not_create_a_Product_invalid_price() {
-        final var productMock = MockHelper.buildProduct();
+        final var productMock = MockProductHelper.buildProduct();
 
         assertThrows(
                 RuntimeException.class,

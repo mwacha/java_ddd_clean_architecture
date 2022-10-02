@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mwacha.helper.MockHelper;
+import tk.mwacha.helper.MockProductHelper;
 import tk.mwacha.infrastructure.product.gateway.ProductGateway;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,7 +19,7 @@ class ListProductUseCaseTest {
 
     @Test
     void should_list_a_product() {
-        final var products = MockHelper.buildProducts();
+        final var products = MockProductHelper.buildProducts();
 
         final var useCase = new ListProductUseCase(gateway);
 

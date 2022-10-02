@@ -4,9 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mwacha.domain.customer.factory.CustomerFactory;
 import tk.mwacha.domain.customer.valueobject.Address;
-import tk.mwacha.helper.MockHelper;
+import tk.mwacha.helper.MockCustomerHelper;
 import tk.mwacha.infrastructure.customer.gateway.CustomerGateway;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +19,7 @@ class UpdateCustomerUseCaseTest {
 
     @Test
     void should_update_a_customer() {
-        final var customerMock = MockHelper.buildCustomer();
+        final var customerMock = MockCustomerHelper.buildCustomer();
 
         gateway.create(customerMock);
 

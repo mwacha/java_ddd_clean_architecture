@@ -4,14 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mwacha.domain.customer.entity.Customer;
 import tk.mwacha.domain.customer.factory.CustomerFactory;
 import tk.mwacha.domain.customer.valueobject.Address;
-import tk.mwacha.helper.MockHelper;
+import tk.mwacha.helper.MockCustomerHelper;
 import tk.mwacha.infrastructure.customer.gateway.CustomerGateway;
-import tk.mwacha.usecase.customer.find.FindCustomerUseCase;
-import tk.mwacha.usecase.customer.find.InputFindCustomerDTO;
-import tk.mwacha.usecase.customer.find.OutputFindCustomerDTO;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,7 +20,7 @@ class CreateCustomerUseCaseTest {
 
     @Test
     void should_create_a_customer() {
-        final var customerMock = MockHelper.buildCustomer();
+        final var customerMock = MockCustomerHelper.buildCustomer();
 
         final var customerToSave = CustomerFactory.createWithAddress(customerMock.getName(), customerMock.getAddress());
 
@@ -44,7 +40,7 @@ class CreateCustomerUseCaseTest {
 
     @Test
     void should_not_create_a_customer_invalid_name() {
-        final var customerMock = MockHelper.buildCustomer();
+        final var customerMock = MockCustomerHelper.buildCustomer();
         ;
 
         assertThrows(
@@ -59,7 +55,7 @@ class CreateCustomerUseCaseTest {
 
     @Test
     void should_not_create_a_customer_invalid_address() {
-        final var customerMock = MockHelper.buildCustomer();
+        final var customerMock = MockCustomerHelper.buildCustomer();
 
         assertThrows(
                 RuntimeException.class,

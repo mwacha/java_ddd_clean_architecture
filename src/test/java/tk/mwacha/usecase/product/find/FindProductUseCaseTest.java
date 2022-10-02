@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mwacha.helper.MockHelper;
+import tk.mwacha.helper.MockProductHelper;
 import tk.mwacha.infrastructure.product.gateway.ProductGateway;
 
 import java.util.UUID;
@@ -22,7 +22,7 @@ class FindProductUseCaseTest {
 
     @Test
     void should_find_a_product() {
-        final var productToSave = MockHelper.buildProduct();
+        final var productToSave = MockProductHelper.buildProduct();
         final var useCase = new FindProductUseCase(gateway);
 
         gateway.create(productToSave);
@@ -40,7 +40,7 @@ class FindProductUseCaseTest {
 
     @Test
     void should_not_find_a_product() {
-        final var productToSave = MockHelper.buildProduct();
+        final var productToSave = MockProductHelper.buildProduct();
         final var useCase = new FindProductUseCase(gateway);
 
         gateway.create(productToSave);

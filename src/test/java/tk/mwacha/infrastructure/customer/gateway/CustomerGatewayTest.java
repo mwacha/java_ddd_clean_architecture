@@ -1,4 +1,4 @@
-package tk.mwacha.infrastructure.gateway;
+package tk.mwacha.infrastructure.customer.gateway;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -10,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mwacha.helper.MockHelper;
-import tk.mwacha.infrastructure.customer.gateway.CustomerGateway;
+import tk.mwacha.helper.MockCustomerHelper;
 
 @SpringBootTest
 @Transactional
@@ -21,7 +20,7 @@ class CustomerGatewayTest {
 
   @Test
   void should_create_a_customer() {
-    final var customerToSave = MockHelper.buildCustomer();
+    final var customerToSave = MockCustomerHelper.buildCustomer();
 
     gateway.create(customerToSave);
 
@@ -40,7 +39,7 @@ class CustomerGatewayTest {
 
   @Test
   void should_update_a_customer() {
-    final var customerToSave = MockHelper.buildCustomer();
+    final var customerToSave = MockCustomerHelper.buildCustomer();
 
     gateway.create(customerToSave);
 
@@ -69,7 +68,7 @@ class CustomerGatewayTest {
   @Test
   void should_find_a_customer() {
 
-    final var customer = MockHelper.buildCustomer();
+    final var customer = MockCustomerHelper.buildCustomer();
 
     gateway.create(customer);
 
@@ -81,7 +80,7 @@ class CustomerGatewayTest {
   @Test
   void should_throw_an_error_when_find_a_customer() {
 
-    final var customer = MockHelper.buildCustomer();
+    final var customer = MockCustomerHelper.buildCustomer();
 
     gateway.create(customer);
 
@@ -91,9 +90,9 @@ class CustomerGatewayTest {
   @Test
   void should_find_all_customer() {
 
-    final var customer = MockHelper.buildCustomer();
+    final var customer = MockCustomerHelper.buildCustomer();
 
-    final var customer2 = MockHelper.buildCustomer();
+    final var customer2 = MockCustomerHelper.buildCustomer();
     customer2.changeName("Test2");
     final var customers = List.of(customer, customer2);
 
