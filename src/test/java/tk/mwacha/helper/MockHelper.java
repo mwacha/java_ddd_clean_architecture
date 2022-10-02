@@ -1,13 +1,14 @@
 package tk.mwacha.helper;
 
+import tk.mwacha.domain.checkout.entity.Order;
+import tk.mwacha.domain.checkout.entity.OrderItem;
+import tk.mwacha.domain.customer.entity.Customer;
+import tk.mwacha.domain.customer.valueobject.Address;
+import tk.mwacha.domain.product.entity.Product;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-import tk.mwacha.domain.customer.entity.Customer;
-import tk.mwacha.domain.checkout.entity.Order;
-import tk.mwacha.domain.product.entity.Product;
-import tk.mwacha.domain.checkout.entity.OrderItem;
-import tk.mwacha.domain.customer.valueobject.Address;
 
 public final class MockHelper {
   public static Customer buildCustomer() {
@@ -39,6 +40,19 @@ public final class MockHelper {
         .price(BigDecimal.valueOf(100))
         .build();
   }
+
+  public static Product buildProduct2() {
+    return Product.builder()
+            .id(UUID.randomUUID())
+            .name("Product2")
+            .price(BigDecimal.valueOf(200))
+            .build();
+  }
+
+  public static List<Product> buildProducts() {
+    return List.of(buildProduct(), buildProduct2());
+  }
+
 
   public static OrderItem buildOrderItem(final Product product) {
     return OrderItem.builder()
