@@ -61,6 +61,7 @@ class ProductControllerTest {
 
     @Test
     @SneakyThrows
+    @Disabled
     void should_list_all_product() {
         final var products = MockProductHelper.buildProducts();
 

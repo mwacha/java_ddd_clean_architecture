@@ -5,12 +5,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import tk.mwacha.infrastructure.api.presenters.CustomerPresenter;
 import tk.mwacha.usecase.customer.create.CreateCustomerUseCase;
 import tk.mwacha.usecase.customer.create.InputCreateCustomerDTO;
 import tk.mwacha.usecase.customer.create.OutputCreateCustomerDTO;
 import tk.mwacha.usecase.customer.list.InputListCustomerDTO;
 import tk.mwacha.usecase.customer.list.ListCustomerUseCase;
 import tk.mwacha.usecase.customer.list.OutputListCustomerDTO;
+
+import javax.xml.bind.JAXBException;
 
 @RestController
 @RequestMapping("api/v1/customers")
@@ -26,9 +29,9 @@ public class CustomerController {
         return createCustomerUseCase.execute(dto);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
     @ResponseBody
-    public OutputListCustomerDTO list(@RequestBody InputListCustomerDTO dto) {
-       return listCustomerUseCase.execute(dto);
+    public String list(@RequestBody InputListCustomerDTO dto) throws JAXBException {
+       return CustomerPresenter.toXML(listCustomerUseCase.execute(dto));
     }
 }

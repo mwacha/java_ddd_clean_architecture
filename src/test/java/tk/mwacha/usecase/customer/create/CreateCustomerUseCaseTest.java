@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mwacha.domain.customer.factory.CustomerFactory;
 import tk.mwacha.domain.customer.valueobject.Address;
+import tk.mwacha.domain.shared.exception.ErrorException;
 import tk.mwacha.helper.MockCustomerHelper;
 import tk.mwacha.infrastructure.customer.gateway.CustomerGateway;
 
@@ -41,15 +42,14 @@ class CreateCustomerUseCaseTest {
     @Test
     void should_not_create_a_customer_invalid_name() {
         final var customerMock = MockCustomerHelper.buildCustomer();
-        ;
 
         assertThrows(
-                RuntimeException.class,
+                ErrorException.class,
                 () -> {
                     customerMock.changeName("");
                 })
                 .getMessage()
-                .equals("Name is required");
+                .equals("customer: Name is required");
 
     }
 

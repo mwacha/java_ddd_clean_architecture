@@ -61,6 +61,7 @@ class CustomerControllerTest {
 
     @Test
     @SneakyThrows
+  //  @Disabled
     void should_list_all_customer() {
         final var customers = MockCustomerHelper.buildCustomers();
 
@@ -83,13 +84,20 @@ class CustomerControllerTest {
                 .andReturn();
 
 
-        final var result = mockMvc
-                .perform(get(CONTEXT_ROOT))
-               // .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-               // .andExpect(content().json(json, true))
-                .andReturn();
+//        final var result = mockMvc
+//                .perform(get(CONTEXT_ROOT))
+//               // .andExpect(status().isOk())
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+//               // .andExpect(content().json(json, true))
+//                .andReturn();
 //       Assertions.assertTrue(result.getResponse().);
+
+        final var listResponseXML =  mockMvc
+                .perform(get(CONTEXT_ROOT).accept("Accept", "application/xml"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_XML_VALUE))
+                // .andExpect(content().json(json, true))
+                .andReturn();
 
     }
 }
